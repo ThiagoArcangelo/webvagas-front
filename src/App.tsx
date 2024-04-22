@@ -5,11 +5,13 @@ function App() {
 
   return (
     <>
-      <div className="max-4xl mx-auto ">
+      <div className="max-4xl mx-auto">
         <Header />
-        <div className="border flex justify-center">
-          <Tabela />
-        </div>
+        <div className='flex justify-center'>
+          <div className="border flex justify-start w-3/4 border-none">
+            <Tabela />
+          </div>
+        </div>       
       </div>
     </>
   )
