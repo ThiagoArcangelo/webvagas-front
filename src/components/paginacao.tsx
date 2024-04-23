@@ -8,7 +8,11 @@ import {
   PaginationPrevious,
 } from "./ui/pagination"
 
-export function Paginacao() {
+type Contagem = {
+  children: React.ReactNode;
+}
+
+export function Paginacao(props: Contagem) {
   return (
     <Pagination>
       <PaginationContent>
@@ -18,6 +22,7 @@ export function Paginacao() {
         <PaginationItem>
           <PaginationLink href="#">1</PaginationLink>
         </PaginationItem>
+        {props.children}
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>
