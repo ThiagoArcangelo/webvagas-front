@@ -7,11 +7,9 @@ function App() {
     <>
       <div className="max-4xl mx-auto">
         <Header />
-        <div className='flex justify-center'>
-          <div className="border flex justify-start w-3/4 border-none">
+          <div className="border flex justify-center w-3/4 border-none">
             <Tabela />
           </div>
-        </div>       
       </div>
     </>
   )

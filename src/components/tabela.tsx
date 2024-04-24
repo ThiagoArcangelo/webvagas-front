@@ -21,7 +21,7 @@ interface Item {
 export function Tabela() {
   const [dados, setDados ] = useState<Array<Item>>([]);
   const [total, setTotal] = useState<number>(0);
-  const [limit, setLimit] = useState(10);
+  // const [limit, setLimit] = useState(10);
 
   function retornaDados()  {
     api.get("/lista")
@@ -40,7 +40,7 @@ export function Tabela() {
 
   return (
     <div className="min-w-96 h-[80%]" >
-      <div className="border-none"> 
+      <div className="border-none h-[85%]"> 
         <Table className="border-none">
           <TableHeader className="boder-none">
             <TableRow className="border-none gap-2">
@@ -53,7 +53,7 @@ export function Tabela() {
             {dados.map((item) => ( 
               <TableRow className="border-none" key={item._id}>
                 <TableCell className="font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2 py-2">{item.Vaga}</TableCell>
-                <TableCell className="text-[#6e7781] hover:text-[2222ff#] border-b-[1px] border-solid border-[#dadada] px-2 py-2">{item.Local}</TableCell>
+                <TableCell className="text-left text  text-[#6e7781] hover:text-[2222ff#] border-b-[1px] border-solid border-[#dadada] px-2 py-2">{item.Local}</TableCell>
                 <TableCell className=" w-10 font-medium text-[#2222ff]  cursor-pointer transition ease-in-out delay-100 hover:scale-95  duration-300 border-b-[1px] border-solid border-[#dadada]px-2 py-2 ">
                   <a href={item.Url} target="blank">
                     Saiba Mais
