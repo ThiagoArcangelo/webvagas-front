@@ -1,14 +1,18 @@
 import { Header } from './components/header';
 import { Tabela } from "./components/tabela";
+import { Footer } from "./components/footer";
 
 function App() {
 
   return (
     <>
-      <div className="max-4xl mx-auto">
+      <div className="">
         <Header />
-          <div className="border flex justify-center w-3/4 border-none">
+          <div className="borde w-[70%] flex ml-[15%] mr-30 border-none">
             <Tabela />
+          </div>
+          <div className="mt-8 w-=[10%]">
+            <Footer />
           </div>
       </div>
     </>

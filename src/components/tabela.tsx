@@ -8,7 +8,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Paginacao } from "./paginacao"
+
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
+
+
 import api from "@/services/api";
 
 interface Item {
@@ -20,27 +29,35 @@ interface Item {
 
 export function Tabela() {
   const [dados, setDados ] = useState<Array<Item>>([]);
-  const [total, setTotal] = useState<number>(0);
-  // const [limit, setLimit] = useState(10);
+  const [paginas, setPaginas] = useState([]);
+  const [paginaAtual, setPaginaAtual] = useState(1);
+
+  const vPaginas:any = [];
 
   function retornaDados()  {
-    api.get("/lista")
+    api.get(`/lista?page=${paginaAtual}`)
       .then((response) => {console.log(response.data);
-         setDados(response.data.item);
-         setTotal(response.data.contagem);
+        setDados(response.data.item);                  
+      
+        const totalPaginas = Math.ceil(response.data.contagem/ 10);
+
+        for(let i = 0; i <= totalPaginas; i++) {
+          vPaginas.push(i);
+        }
+        setPaginas(vPaginas);
       })
       .catch((err) => console.log("Ocorreu algum erro.", err));
   }
 
   useEffect(() => {
     retornaDados();
-  }, []) 
+  }, [])  
 
   if(!dados) return null;
 
   return (
     <div className="min-w-96 h-[80%]" >
-      <div className="border-none h-[85%]"> 
+      <div className="border-none h-[90%]"> 
         <Table className="border-none">
           <TableHeader className="boder-none">
             <TableRow className="border-none gap-2">
@@ -53,7 +70,7 @@ export function Tabela() {
             {dados.map((item) => ( 
               <TableRow className="border-none" key={item._id}>
                 <TableCell className="font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2 py-2">{item.Vaga}</TableCell>
-                <TableCell className="text-left text  text-[#6e7781] hover:text-[2222ff#] border-b-[1px] border-solid border-[#dadada] px-2 py-2">{item.Local}</TableCell>
+                <TableCell className="text-left text  text-[#6e7781] hover:text-[2222ff#] border-b-[1px] border-solid border-[#dadada] px-2 py-2 text-xs">{item.Local}</TableCell>
                 <TableCell className=" w-10 font-medium text-[#2222ff]  cursor-pointer transition ease-in-out delay-100 hover:scale-95  duration-300 border-b-[1px] border-solid border-[#dadada]px-2 py-2 ">
                   <a href={item.Url} target="blank">
                     Saiba Mais
@@ -64,9 +81,19 @@ export function Tabela() {
           </TableBody>
         </Table>
       </div> 
-      <div className="w-auto m-8 flex justify-start border-b-2 border-solid border-[#ddd]">
-        <Paginacao>{total}</Paginacao>
+      {/* Paginação*/}       
+      <div className=" h-[10%] w-[100%] mt-5 ">      
+        <Pagination className="flex justify-end">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>            
+            <PaginationItem>
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
-  </div>  
+    </div>  
   )
 }
