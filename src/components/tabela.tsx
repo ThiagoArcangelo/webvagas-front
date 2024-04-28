@@ -22,6 +22,7 @@ import {
 
 
 import api from "@/services/api";
+import { Button } from "./ui/button";
 
 interface Item {
   _id: number;
@@ -64,43 +65,55 @@ export function Tabela() {
   if(!dados) return null;
 
   return (
-    <div className="w-[80%] h-[80%]" >
-      <div className="border-none "> 
-        <Table className="border-none w-[100%]">
+    <div className="w-[80%]" >
+      <div className="border-none flex justify-between "> 
+        <Table className="border-none h-[65vh] ">
           <TableHeader className="boder-none">
-            <TableRow className="w-[50%] border-none gap-2">
-              <TableHead className="border-none"></TableHead>
-              <TableHead className="w-[400px] ml-14 border-none"></TableHead>
-              <TableHead className="w-[90px]"></TableHead>
+            <TableRow className=" border-none gap-2">
+              <TableHead className="border-none mr-0 "></TableHead>
+              <TableHead className=" ml-14 border-none mr-0"></TableHead>
+              <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="boder-none">
             {dados.map((item) => ( 
-              <TableRow className="border-none" key={item._id}>
-                <TableCell className="font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2">{item.Vaga}</TableCell>
-                <TableCell className="text-left text  text-[#6e7781] hover:text-[2222ff#] border-b-[1px] border-solid
-                 border-[#dadada] px-2 text-xs">{item.Local
+              <TableRow className="border-none " key={item._id}>
+
+                <TableCell className= "text-left w-[440px] font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2">{item.Vaga}</TableCell>
+
+                <TableCell className="text-left  text-[#6e7781] hover:text-[2222ff#] border-b-[1px] border-solid
+                 border-[#dadada] px-0 text-xs mr-10">{item.Local
                 }</TableCell>
-                <TableCell className="font-medium text-[#2222ff]  cursor-pointer transition ease-in-out delay-100 hover:scale-95 
-                 duration-300 border-b-[1px] border-solid border-[#dadada]px-2 ">
+
+                <TableCell className="text-right font-medium text-[#2222ff]  cursor-pointer transition ease-in-out delay-100 hover:scale-95 
+                 duration-300 border-b-[1px] border-solid border-[#dadada]">
                   <a href={item.Url} target="blank">
                     Saiba Mais
                   </a>
                 </TableCell>
+
               </TableRow>
             ))}     
           </TableBody>
         </Table>
       </div> 
       {/* Paginação*/}       
-      <div className=" h-[10%] w-[100%] mt-5 flex justify-end">      
+      <div className=" h-[10vh] w-[100%] mt-1 flex justify-end">      
       <Pagination className="flex justify-end">
           <PaginationContent>
             <PaginationItem>
-              <PaginationPrevious onClick={paginaAnterior} aria-disabled={paginaAtual < 1} href="#"  className="hover:bg-gray-200 px-2 py-2 hover:rounded w-24 cursor-pointer"  />
+              <Button onClick={paginaAnterior} disabled={paginaAtual <= 1}  className="hover:bg-gray-200 px-2 py-2 hover:rounded w-24
+               cursor-pointer" 
+             >
+              Anterior
+            </Button> 
             </PaginationItem>         
             <PaginationItem>
-              <PaginationNext onClick={proximaPagina} aria-disabled={paginaAtual === totalPaginas} href="#"  className="hover:bg-gray-200 px-2 py-2 hover:rounded w-24 cursor-pointer"  />
+              <Button  onClick={proximaPagina} disabled={paginaAtual === totalPaginas}  className="hover:bg-gray-200 px-2 py-2
+               hover:rounded w-24 cursor-pointer" 
+              >
+                Próxima
+              </Button>
             </PaginationItem>
           </PaginationContent>
         </Pagination>        

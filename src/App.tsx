@@ -5,17 +5,15 @@ import { Footer } from "./components/footer";
 function App() {
 
   return (
-    <>
-      <div className="">
+      <div className="h-100%">
         <Header />
-          <div className="borde w-[70%] flex ml-[15%] mr-30 border-none">
+          <div className=" w-[70%] h-[75vh] flex ml-[15%] mr-30 border-none">
             <Tabela />
           </div>
           <div className="mt-8 w-=[10%]">
             <Footer />
           </div>
       </div>
-    </>
   )
 }
 

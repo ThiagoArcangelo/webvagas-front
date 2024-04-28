@@ -1,5 +1,4 @@
 
-
 export function Header(){
   return (
     <div className="flex items-center justify-between min-h-1  h-20 gap-4 bg-[#14192f]">
