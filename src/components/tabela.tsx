@@ -65,12 +65,12 @@ export function Tabela() {
   if(!dados) return null;
 
   return (
-    <div className="w-[80%]" >
-      <div className="border-none flex justify-between "> 
-        <Table className="border-none h-[65vh] ">
-          <TableHeader className="boder-none">
-            <TableRow className=" border-none gap-2">
-              <TableHead className="border-none mr-0 "></TableHead>
+    <div className="w-[80%] " >
+      <div className="border-none flex justify-between"> 
+        <Table className="border-none h-[65vh]">
+          <TableHeader className="boder-none  ">
+            <TableRow className=" border-none ">
+              <TableHead className="border-none mr-0"></TableHead>
               <TableHead className=" ml-14 border-none mr-0"></TableHead>
               <TableHead></TableHead>
             </TableRow>
@@ -79,7 +79,9 @@ export function Tabela() {
             {dados.map((item) => ( 
               <TableRow className="border-none " key={item._id}>
 
-                <TableCell className= "text-left w-[440px] font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2">{item.Vaga}</TableCell>
+                <TableCell className= "text-left w-[440px] font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2">
+                  {item.Vaga.length >= 50 ? item.Vaga?.slice(0, 45) : item.Vaga}
+                </TableCell>
 
                 <TableCell className="text-left  text-[#6e7781] hover:text-[2222ff#] border-b-[1px] border-solid
                  border-[#dadada] px-0 text-xs mr-10">{item.Local
@@ -103,14 +105,14 @@ export function Tabela() {
           <PaginationContent>
             <PaginationItem>
               <Button onClick={paginaAnterior} disabled={paginaAtual <= 1}  className="hover:bg-gray-200 px-2 py-2 hover:rounded w-24
-               cursor-pointer" 
+               cursor-pointer text-[12px]" 
              >
               Anterior
             </Button> 
             </PaginationItem>         
             <PaginationItem>
               <Button  onClick={proximaPagina} disabled={paginaAtual === totalPaginas}  className="hover:bg-gray-200 px-2 py-2
-               hover:rounded w-24 cursor-pointer" 
+               hover:rounded w-24 cursor-pointer text-[12px]" 
               >
                 Próxima
               </Button>
