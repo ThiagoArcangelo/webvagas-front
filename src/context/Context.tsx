@@ -7,8 +7,7 @@ interface InfoContextProps {
   totalPaginas: number;
   paginaAtual: number;
   setPaginaAtual: (pagina: number) => void;
-  titulo: string;
-  setTitulo: (titulo: string) => void;
+  buscaVaga: (valor: string) => void;
 }
 
 export const infoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
@@ -22,25 +21,24 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
 
   const retornaVagas = useCallback(async () => {
     try {
-      const retorno = await api.get(`/lista?page=${paginaAtual}`);
+      const retorno = await api.get(`/lista?page=${paginaAtual}&titulo=${titulo}`);
       setDados(retorno.data.item);   
       setTotalPaginas(retorno.data.totalPaginas);         
     } catch (error) {
       console.log("Ocorreu algum erro.", error);
     }
-  }, [paginaAtual]);
+  }, [paginaAtual, titulo]);
+
+  const buscaVaga = useCallback( async (titulo: string) => {    
+    setTitulo(titulo);
+  },[]);
 
   useEffect(() => {
     retornaVagas();
   }, [retornaVagas]);
 
-  const buscaVaga = useCallback( async () => {
-    const retorno = await api.get("/lista/busca");
-    setTitulo(retorno.data.titulo);
-  },[titulo]);
-
   return (
-    <infoVagasContext.Provider value={{vagas: dados, totalPaginas, paginaAtual, setPaginaAtual, titulo, setTitulo }}>
+    <infoVagasContext.Provider value={{vagas: dados, totalPaginas, paginaAtual, setPaginaAtual,  buscaVaga }}>
       {children}
     </infoVagasContext.Provider>
   );

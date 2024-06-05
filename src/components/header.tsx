@@ -4,7 +4,7 @@ import { infoVagasContext } from "@/context/Context";
 
 
 export function Header(){
-  const { setTitulo } = useContext(infoVagasContext);
+  const { buscaVaga } = useContext(infoVagasContext);
   const [titulo, setValorTitulo] = useState("");
 
   const valorTitulo = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +12,7 @@ export function Header(){
   }
 
   const buscaTitulo = () => {
-    setTitulo(titulo);
+    buscaVaga(titulo);
   }
 
   return (
