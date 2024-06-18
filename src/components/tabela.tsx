@@ -27,15 +27,12 @@ import {
 // import api from "@/services/api";
 import { Button } from "./ui/button";
 
-export interface Item {
-  _id: number;
-  Vaga?: string;
-  Local?: string;
-  Url?: string;
-}
+
 
 export function Tabela() {
   const {vagas: dados, setPaginaAtual, paginaAtual, totalPaginas} = useContext(infoVagasContext);
+
+  //#region States comentados
   // const [dados, setDados ] = useState<Array<Item>>([]);
   // const [totalPaginas, setTotalPaginas] = useState<number>(1);
   // const [paginaAtual, setPaginaAtual] = useState<number>(1);
@@ -56,6 +53,7 @@ export function Tabela() {
   // useEffect(() => {
   //   retornaDados();
   // },[paginaAtual])  
+  //#endregion
 
   const proximaPagina = () => {
     setPaginaAtual((proxPagina) => proxPagina + 1);
@@ -65,6 +63,7 @@ export function Tabela() {
     setPaginaAtual((pagAnterior) => pagAnterior - 1);
   };
 
+  //#region Funcoes de pagina comentados
   // const proximaPagina = () => {
   //   if (paginaAtual < totalPaginas) {
   //     setPaginaAtual(paginaAtual + 1);
@@ -78,6 +77,8 @@ export function Tabela() {
   // };
 
   // if(!dados) return null;
+  //#endregion
+
   if (!dados || dados.length === 0) return null;
 
   return (

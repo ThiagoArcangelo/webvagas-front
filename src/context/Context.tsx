@@ -1,18 +1,11 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import api from '@/services/api';
-import { Item } from '@/components/tabela';
-
-interface InfoContextProps {
-  vagas: Item[];
-  totalPaginas: number;
-  paginaAtual: number;
-  setPaginaAtual: (pagina: number) => void;
-  buscaVaga: (valor: string) => void;
-}
+import { InfoContextProps, Item } from './Interfaces/interfaces';
 
 export const infoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
 
 export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) => {
+
   const [dados, setDados] = useState<Item[]>([]);
   const [totalPaginas, setTotalPaginas] = useState<number>(1);
   const [paginaAtual, setPaginaAtual] = useState<number>(1);
@@ -20,18 +13,21 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   const [titulo, setTitulo] = useState("");
 
   const retornaVagas = useCallback(async () => {
-    try {
-      const retorno = await api.get(`/lista?page=${paginaAtual}&titulo=${titulo}`);
+    try {      
+      const retorno = await api.get(`/lista?page=${paginaAtual}`);
       setDados(retorno.data.item);   
       setTotalPaginas(retorno.data.totalPaginas);         
     } catch (error) {
       console.log("Ocorreu algum erro.", error);
     }
-  }, [paginaAtual, titulo]);
+  }, [paginaAtual]);
 
-  const buscaVaga = useCallback( async (titulo: string) => {    
+  const buscaVaga = useCallback( async (titulo: string) => {   
+    const retorno = await api.get(`/lista/busca?titulo=${titulo}`); 
+    setDados(retorno.data);
+    console.log(retorno.data);
     setTitulo(titulo);
-  },[]);
+  },[titulo]);
 
   useEffect(() => {
     retornaVagas();
