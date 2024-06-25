@@ -2,13 +2,18 @@ import { Search } from "lucide-react";
 import { useContext, useState } from "react";
 import { infoVagasContext } from "@/context/Context";
 
-
 export function Header(){
   const { buscaVaga } = useContext(infoVagasContext);
   const [titulo, setValorTitulo] = useState("");
 
-  const valorTitulo = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const valorTitulo = (e: React.ChangeEvent<HTMLInputElement>) => {    
     setValorTitulo(e.target.value);
+  }
+
+  const buscarComEnter = (event: { key: string; }) => {
+    if(event.key == 'Enter'){
+      buscaVaga(titulo);
+    }
   }
 
   const buscaTitulo = () => {
@@ -30,6 +35,7 @@ export function Header(){
           rounded-l-[8px] px-2 outline-none  " 
           value={titulo}
           onChange={valorTitulo}
+          onKeyDown={buscarComEnter}
         />  
         <button onClick={buscaTitulo} className="bg-[slategray] w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
          rounded-r-[8px]   hover:bg-gray-500 px-2 opacity-60  ml-0 cursor-pointer ">

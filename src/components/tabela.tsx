@@ -22,12 +22,8 @@ import {
   // PaginationPrevious,
 } from "@/components/ui/pagination"
 
-
-
 // import api from "@/services/api";
 import { Button } from "./ui/button";
-
-
 
 export function Tabela() {
   const {vagas: dados, setPaginaAtual, paginaAtual, totalPaginas} = useContext(infoVagasContext);

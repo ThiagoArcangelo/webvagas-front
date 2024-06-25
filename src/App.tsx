@@ -10,7 +10,7 @@ function App() {
           <div className=" w-[70%] h-[75vh] flex ml-[15%] mr-30 border-none mt-0">
             <Tabela />
           </div>
-          <div className="mt-8 w-=[10%]">
+          <div className="mb-1-8 w-=[10%]">
             <Footer />
           </div>
       </div>
