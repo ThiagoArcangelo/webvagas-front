@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { infoVagasContext } from "@/context/Context";
 import {
   Table,
@@ -24,10 +24,10 @@ import {
 
 // import api from "@/services/api";
 import { Button } from "./ui/button";
+import { Item } from "@/context/Interfaces/interfaces";
 
 export function Tabela() {
   const {vagas: dados, setPaginaAtual, paginaAtual, totalPaginas} = useContext(infoVagasContext);
-
   //#region States comentados
   // const [dados, setDados ] = useState<Array<Item>>([]);
   // const [totalPaginas, setTotalPaginas] = useState<number>(1);
@@ -90,7 +90,7 @@ export function Tabela() {
           </TableHeader>
           <TableBody className="boder-none">
             {dados.map((item: Item) => ( 
-              <TableRow className="border-none " key={item._id}>
+              <TableRow className="border-none h-[6vh]" key={item._id}>
 
                 <TableCell className= "text-left w-[440px] font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2">
                   {item.Vaga ? (item.Vaga.length >= 50 ? item.Vaga?.slice(0, 45) : item.Vaga) : "N/A"}

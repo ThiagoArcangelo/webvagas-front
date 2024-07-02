@@ -34,7 +34,7 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   }, [retornaVagas]);
 
   return (
-    <infoVagasContext.Provider value={{vagas: dados, totalPaginas, paginaAtual, setPaginaAtual,  buscaVaga }}>
+    <infoVagasContext.Provider value={{vagas: dados, totalPaginas, paginaAtual, setPaginaAtual,  buscaVaga  }}>
       {children}
     </infoVagasContext.Provider>
   );

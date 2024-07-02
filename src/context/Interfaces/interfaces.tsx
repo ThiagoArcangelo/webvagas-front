@@ -9,6 +9,6 @@ export interface InfoContextProps {
   vagas: Item[];
   totalPaginas: number;
   paginaAtual: number;
-  setPaginaAtual: (pagina: number) => void;
-  buscaVaga: (valor: string) => void;
+  setPaginaAtual: React.Dispatch<React.SetStateAction<number>>;//(pagina: number) => void;
+  buscaVaga: (valor: string) => Promise<void>;
 }
