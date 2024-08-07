@@ -27,29 +27,9 @@ import { Button } from "./ui/button";
 import { Item } from "@/context/Interfaces/interfaces";
 
 export function Tabela() {
-  const {vagas: dados, setPaginaAtual, paginaAtual, totalPaginas} = useContext(infoVagasContext);
-  //#region States comentados
-  // const [dados, setDados ] = useState<Array<Item>>([]);
-  // const [totalPaginas, setTotalPaginas] = useState<number>(1);
-  // const [paginaAtual, setPaginaAtual] = useState<number>(1);
+  const {vagas: dados, setPaginaAtual, paginaAtual, contagem, totalPaginas} = useContext(infoVagasContext);
 
-  // function retornaDados()  {
-  //   api.get(`/lista?page=${paginaAtual}`)
-  //     .then((response) => {console.log(response.data);
-  //       setDados(response.data.item);                  
-      
-  //        const paginasTotais = Math.ceil(response.data.contagem/ 10);  
-        
-  //       setTotalPaginas(paginasTotais);
-    
-  //     })
-  //     .catch((err) => console.log("Ocorreu algum erro.", err));
-  // }
-
-  // useEffect(() => {
-  //   retornaDados();
-  // },[paginaAtual])  
-  //#endregion
+  const paginaSeguinte = paginaAtual + 1;
 
   const proximaPagina = () => {
     setPaginaAtual((proxPagina) => proxPagina + 1);
@@ -58,22 +38,6 @@ export function Tabela() {
   const paginaAnterior = () => {
     setPaginaAtual((pagAnterior) => pagAnterior - 1);
   };
-
-  //#region Funcoes de pagina comentados
-  // const proximaPagina = () => {
-  //   if (paginaAtual < totalPaginas) {
-  //     setPaginaAtual(paginaAtual + 1);
-  //   }
-  // };
-
-  // const paginaAnterior = () => {
-  //   if (paginaAtual > 1) {
-  //     setPaginaAtual(paginaAtual - 1);
-  //   }
-  // };
-
-  // if(!dados) return null;
-  //#endregion
 
   if (!dados || dados.length === 0) return null;
 
@@ -90,7 +54,7 @@ export function Tabela() {
           </TableHeader>
           <TableBody className="boder-none">
             {dados.map((item: Item) => ( 
-              <TableRow className="border-none h-[6vh]" key={item._id}>
+              <TableRow className="border-none h-[37px]" key={item._id}>
 
                 <TableCell className= "text-left w-[440px] font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2">
                   {item.Vaga ? (item.Vaga.length >= 50 ? item.Vaga?.slice(0, 45) : item.Vaga) : "N/A"}
@@ -122,9 +86,10 @@ export function Tabela() {
              >
               Anterior
             </Button> 
-            </PaginationItem>         
+            </PaginationItem>      
+            <div className="px-4 py-2 text-[12px]">{`${paginaAtual}/${contagem}`}</div>   
             <PaginationItem>
-              <Button  onClick={proximaPagina} disabled={paginaAtual === totalPaginas}  className="hover:bg-gray-200 px-2 py-2
+              <Button  onClick={proximaPagina} disabled={paginaAtual === totalPaginas}  className="hover:bg-gray-200 px-4 py-2
                hover:rounded w-24 cursor-pointer text-[12px]" 
               >
                 Próxima
