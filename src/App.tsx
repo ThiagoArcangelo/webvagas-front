@@ -9,7 +9,7 @@ function App() {
         <div className="h-20">
           <Header />
         </div>
-        <div className=" w-[70%]  flex ml-[15%] border-none mt-auto">
+        <div className=" w-[70%]  flex ml-[15%] border-none mt-1">
           <Tabela />
         </div>
         <div className=" min-h-12 w-[100%] mt-auto">

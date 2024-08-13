@@ -90,7 +90,7 @@ export function Tabela() {
             </PaginationItem>      
             <div className="px-4 py-2 text-[12px]">{`${paginaAtual}/${total}`}</div>   
             <PaginationItem>
-              <Button  onClick={proximaPagina} disabled={paginaAtual === totalPaginas}  className="hover:bg-gray-200 px-4 py-2
+              <Button  onClick={proximaPagina} disabled={paginaAtual === total}  className="hover:bg-gray-200 px-4 py-2
                hover:rounded w-24 cursor-pointer text-[12px]" 
               >
                 Próxima
