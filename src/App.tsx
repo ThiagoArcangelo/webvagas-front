@@ -5,14 +5,16 @@ import { Footer } from "./components/footer";
 function App() {
 
   return (
-      <div className="h-100% flex flex-col h-screen justify-between">
-        <Header />
-          <div className=" w-[70%] h-[75vh] flex ml-[15%] border-none mt-0">
-            <Tabela />
-          </div>
-          <div className=" h-12 w-=[7%] mt-2">
-            <Footer />
-          </div>
+      <div className=" flex w-[100%] flex-col h-screen min-h-[100%] justify-between">
+        <div className="h-20">
+          <Header />
+        </div>
+        <div className=" w-[70%]  flex ml-[15%] border-none mt-auto">
+          <Tabela />
+        </div>
+        <div className=" min-h-12 w-[100%] mt-auto">
+          <Footer />
+        </div>
       </div>
   )
 }

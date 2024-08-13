@@ -37,9 +37,9 @@ export function Header(){
           onChange={valorTitulo}
           onKeyDown={buscarComEnter}
         />  
-        <button onClick={buscaTitulo} className="bg-[slategray] w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
-         rounded-r-[8px]   hover:bg-gray-500 px-2 opacity-60  ml-0 cursor-pointer ">
-          <Search color="#FFF" size={17} />
+        <button onClick={buscaTitulo} className="bg-slate-300 w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
+         rounded-r-[8px]   hover:bg-slate-200 px-2 opacity-60  ml-0 cursor-pointer ">
+          <Search color="#14192f" size={17} />
         </button>  
       </div>  
     </div>
