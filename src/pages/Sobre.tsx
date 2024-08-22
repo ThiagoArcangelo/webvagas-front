@@ -2,26 +2,26 @@
 
 export function Sobre() {
     return (
-        <div className="w-[100%] flex flex-col">
-            <h2>Sobre Nós</h2>
-            <h3>Nossa missão</h3>
-            <p>
+        <div className="w-[100%] flex flex-col py-12">
+            <h2 className=" text=[#dadada] font-semibold py-2">Sobre Nós</h2>
+            <h3 className="text=[#dadada] font-semibold py-4">Nossa missão</h3>
+            <p className="text=[#dadada]">
                 No BuscaEmpregos-Bauru, nossa missão é tornar a busca por oportunidades de emprego 
                 mais simples e eficiente. Estamos comprometidos em reunir todas as vagas disponíveis 
                 na nossa região em um único lugar, facilitando a vida daqueles que estão em busca de 
                 recolocação profissional. Acreditamos que a centralização das informações não apenas economiza tempo, 
                 mas também oferece uma visão mais clara e acessível das oportunidades disponíveis.
             </p>
-            <h3>Como Funciona</h3>
-            <p>
+            <h3 className=" text=[#dadada] font-semibold py-4">Como Funciona</h3>
+            <p className="text=[#dadada]">
                 Reunimos informações sobre vagas de emprego exclusivamente de sites voltados
                 para o nosso município. Nossa abordagem é focada em garantir que você tenha 
                 acesso às ofertas de trabalho mais recentes e relevantes, diretamente da sua 
                 área de interesse, sem precisar procurar em vários sites diferentes. 
                 Nosso objetivo é proporcionar uma experiência de busca mais conveniente e eficiente.
             </p>
-            <h3>Nossa História</h3>
-            <p>
+            <h3 className=" text=[#dadada] font-semibold py-4">Nossa História</h3>
+            <p className="text=[#dadada]">
                 O BuscaEmpregos-Bauru nasceu do desejo de resolver um problema comum: a dificuldade de 
                 encontrar todas as oportunidades de emprego disponíveis em um só lugar. 
                 Nossa equipe é apaixonada por conectar talentos locais com as melhores ofertas de 
