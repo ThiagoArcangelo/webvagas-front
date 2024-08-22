@@ -27,7 +27,7 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
 
   const buscaVaga = useCallback( async (titulo: string) => {   
     const retorno = await api.get(`/lista/busca?page=${paginaAtual}&titulo=${titulo}`); 
-    setDados(retorno.data);
+    setDados(retorno.data.resultado);
     // console.log(retorno.data);
     setTitulo(titulo);
   },[titulo]);

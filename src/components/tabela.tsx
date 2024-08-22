@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext} from "react";
 import { infoVagasContext } from "@/context/Context";
 import {
   Table,
@@ -27,7 +27,7 @@ import { Button } from "./ui/button";
 import { Item } from "@/context/Interfaces/interfaces";
 
 export function Tabela() {
-  const {vagas: dados, setPaginaAtual, paginaAtual, contagem, totalPaginas} = useContext(infoVagasContext);
+  const {vagas: dados, setPaginaAtual, paginaAtual, contagem} = useContext(infoVagasContext);
   const total = Math.ceil(contagem / 10);
 
   // const paginaSeguinte = paginaAtual + 1;
@@ -88,7 +88,7 @@ export function Tabela() {
               Anterior
             </Button> 
             </PaginationItem>      
-            <div className="px-4 py-2 text-[12px]">{`${paginaAtual}/${total}`}</div>   
+            <div className="px-4 py-2 text-[12px]">{`Página ${paginaAtual} de ${total}`}</div>   
             <PaginationItem>
               <Button  onClick={proximaPagina} disabled={paginaAtual === total}  className="hover:bg-gray-200 px-4 py-2
                hover:rounded w-24 cursor-pointer text-[12px]" 
