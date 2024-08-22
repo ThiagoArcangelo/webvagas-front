@@ -44,28 +44,28 @@ export function Tabela() {
 
   return (
     <div className="w-[80%] " >
-      <div className="border-none flex justify-between"> 
-        <Table className="border-none h-[65vh]">
+      <div className="border-none flex flex-col min-h-[65vh]  justify-between "> 
+        <Table className="border-none flex-1">
           <TableHeader className="boder-none  ">
-            <TableRow className=" border-none h-[37px]">
-              <TableHead className="border-none mr-0"></TableHead>
-              <TableHead className=" ml-14 border-none mr-0"></TableHead>
-              <TableHead></TableHead>
+            <TableRow className=" border-none ">
+              <TableHead className="border-none w-[440px]"></TableHead>
+              <TableHead className=" ml-14 border-none w-[180px]  "></TableHead>
+              <TableHead className="border-none w-[150px]"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody className="boder-none">
             {dados.map((item: Item) => ( 
-              <TableRow className="border-none h-[37px]" key={item._id}>
+              <TableRow className="border-none h-10" key={item._id}>
 
-                <TableCell className= "text-left w-[440px] font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2">
+                <TableCell className= "text-left font-medium color-[#1f2328] border-b-[1px] border-solid border-[#dadada] px-2">
                   {item.Vaga ? (item.Vaga.length >= 50 ? item.Vaga?.slice(0, 45) : item.Vaga) : "N/A"}
                 </TableCell>
 
-                <TableCell className="text-left  text-[#6e7781] hover:text-[2222ff#] border-b-[1px] border-solid
+                <TableCell className="text-left text-[#6e7781] hover:text-[2222ff#] border-b-[1px] border-solid
                  border-[#dadada] px-0 text-xs mr-10">{item.Local || "N/A"}
                  </TableCell>
 
-                <TableCell className="text-right font-medium text-[#2222ff]  cursor-pointer transition ease-in-out delay-100 hover:scale-95 
+                <TableCell className="text-right  font-medium text-[#2222ff]  cursor-pointer transition ease-in-out delay-100 hover:scale-95 
                  duration-300 border-b-[1px] border-solid border-[#dadada]">
                   <a href={item.Url} target="blank">
                     Saiba Mais

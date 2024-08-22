@@ -33,7 +33,7 @@ export function Header(){
         </div>
       </div> 
       <div className="w-52 h-10 flex justify-center items-center">
-        <Link to="/"><img src={logo} alt="BuscaEmpregos-Bauru" /></Link>
+        <Link to="/" ><img src={logo} alt="BuscaEmpregos-Bauru" /></Link>
       </div>
       <div className="w-[30%] flex mr-14">
         <input 
