@@ -9,6 +9,7 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   const [dados, setDados] = useState<Item[]>([]);
   const [totalPaginas, setTotalPaginas] = useState<number>(1);
   const [paginaAtual, setPaginaAtual] = useState<number>(1);
+  const [paginaFiltro, setPaginaFiltro] = useState<number>(1);
   const [contagem, setContagem ] = useState<number>(0);
 
   const [titulo, setTitulo] = useState("");
@@ -26,9 +27,10 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   }, [paginaAtual]);
 
   const buscaVaga = useCallback( async (titulo: string) => {   
-    const retorno = await api.get(`/lista/busca?page=${paginaAtual}&titulo=${titulo}`); 
+    const retorno = await api.get(`/lista/busca?page=${paginaFiltro}&titulo=${titulo}`); 
     setDados(retorno.data.resultado);
     // console.log(retorno.data);
+    setPaginaFiltro(retorno.data.contagem)
     setTitulo(titulo);
   },[titulo]);
 
@@ -37,7 +39,8 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   }, [retornaVagas]);
 
   return (
-    <infoVagasContext.Provider value={{vagas: dados, totalPaginas, paginaAtual, setPaginaAtual, contagem,  buscaVaga  }}>
+    <infoVagasContext.Provider value={{vagas: dados, totalPaginas, paginaAtual, setPaginaAtual,
+                                       contagem,  buscaVaga, paginaFiltro, setPaginaFiltro }}>
       {children}
     </infoVagasContext.Provider>
   );
