@@ -13,7 +13,7 @@ export interface InfoContextProps {
   paginaAtualFiltro: number;
   // totalPaginasFiltro: number;
   contagemFiltro: number;
-  setPaginaAtual: React.Dispatch<React.SetStateAction<number>>;//(pagina: number) => void;
-  setPaginaAtualFiltro: React.Dispatch<React.SetStateAction<number>>;//(paginaFiltro: number) =>  void;
+  setPaginaAtual: React.Dispatch<React.SetStateAction<number>>; //(pagina: number) => void;
+  setPaginaAtualFiltro: React.Dispatch<React.SetStateAction<number>>; //(paginaFiltro: number) =>  void;
   buscaVaga: (valor: string) => Promise<void>;
 }

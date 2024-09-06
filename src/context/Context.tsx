@@ -31,14 +31,16 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
     const retorno = await api.get(`/lista/busca?page=${paginaAtualFiltro}&titulo=${titulo}`); 
     setDados(retorno.data.resultado);
     // console.log(retorno.data);
-    setContagemFiltro(retorno.data.contagem)
+    setContagemFiltro(retorno.data.contagemPesquisa)
     setPaginaAtualFiltro(retorno.data.page);
     setTitulo(titulo);
-  },[titulo]);
+  },[paginaAtualFiltro, titulo]);
 
   useEffect(() => {
     retornaVagas();
-  }, [retornaVagas]);
+    buscaVaga(titulo);
+  }, [retornaVagas, buscaVaga]);
+
 
   return (
     <infoVagasContext.Provider value={{vagas: dados, paginaAtual, setPaginaAtual,

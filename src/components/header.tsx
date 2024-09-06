@@ -14,13 +14,18 @@ export function Header(){
 
   const buscarComEnter = (event: { key: string; }) => {
     if(event.key == 'Enter'){
-      buscaVaga(titulo);
+      {buscaVaga(titulo);} 
+      <Link to="/Pesquisa"></Link>     
     }
   }
 
-  const buscaTitulo = () => {
+  /*const buscaTitulo = () => {
     buscaVaga(titulo);
-  }
+  }*/
+
+    const LimpaPesquisa = () => {
+      setValorTitulo("");
+    }
 
   return (
     <div className="flex items-center justify-between min-h-1  h-20 gap-4 bg-[#14192f]">
@@ -29,11 +34,11 @@ export function Header(){
           <Link to="/Sobre" className="font-semibold">Sobre</Link>
         </div>
         <div className="px-2 py-2 rounded-sm text-[#fff] hover:bg-gray-700 hover:rounded cursor-pointer ">
-          <Link to="/" onClick={() => setPaginaAtual(1)} className="font-semibold">Vagas</Link>
+          <Link to="/" onClick={LimpaPesquisa} className="font-semibold">Vagas</Link>
         </div>
       </div> 
       <div className="w-52 h-10 flex justify-center items-center">
-        <Link to="/" onClick={() => setPaginaAtual(1)} ><img src={logo} alt="BuscaEmpregos-Bauru" /></Link>
+        <Link to="/" onClick={LimpaPesquisa} ><img src={logo} alt="BuscaEmpregos-Bauru" /></Link>
       </div>
       <div className="w-[30%] flex mr-14">
         <input 
@@ -46,7 +51,7 @@ export function Header(){
           onChange={valorTitulo}
           onKeyDown={buscarComEnter}
         />  
-        <Link to="/TabelaFiltro" onClick={buscaTitulo} className="bg-slate-300 w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
+        <Link to="/Pesquisa" onClick={() => buscaVaga(titulo)} className="bg-slate-300 w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
          rounded-r-[8px]   hover:bg-slate-200 px-2 opacity-60  ml-0 cursor-pointer ">
           <Search /*color="#14192f"*/ color="black" size={17} />
         </Link>  
