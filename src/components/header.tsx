@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import logo from "../../public/assets/logo.png"
 
 export function Header(){
-  const { buscaVaga, setPaginaFiltro, setPaginaAtual} = useContext(infoVagasContext);
+  const { buscaVaga, setPaginaAtual} = useContext(infoVagasContext);
   const [titulo, setValorTitulo] = useState("");
 
   const valorTitulo = (e: React.ChangeEvent<HTMLInputElement>) => {    
@@ -20,7 +20,6 @@ export function Header(){
 
   const buscaTitulo = () => {
     buscaVaga(titulo);
-    setPaginaFiltro(1);
   }
 
   return (
@@ -47,10 +46,10 @@ export function Header(){
           onChange={valorTitulo}
           onKeyDown={buscarComEnter}
         />  
-        <button onClick={buscaTitulo} className="bg-slate-300 w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
+        <Link to="/TabelaFiltro" onClick={buscaTitulo} className="bg-slate-300 w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
          rounded-r-[8px]   hover:bg-slate-200 px-2 opacity-60  ml-0 cursor-pointer ">
           <Search /*color="#14192f"*/ color="black" size={17} />
-        </button>  
+        </Link>  
       </div>  
     </div>
   ) 

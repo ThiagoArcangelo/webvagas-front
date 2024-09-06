@@ -7,30 +7,32 @@ export const infoVagasContext = createContext<InfoContextProps>({} as InfoContex
 export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [dados, setDados] = useState<Item[]>([]);
-  const [totalPaginas, setTotalPaginas] = useState<number>(1);
+  // const [totalPaginas, setTotalPaginas] = useState<number>(1);
   const [paginaAtual, setPaginaAtual] = useState<number>(1);
-  const [paginaFiltro, setPaginaFiltro] = useState<number>(1);
+  // const [totalPaginasFiltro, setTotalPaginasFiltro] = useState<number>(1);
   const [contagem, setContagem ] = useState<number>(0);
+  const [paginaAtualFiltro, setPaginaAtualFiltro] = useState<number>(1);
+  const [contagemFiltro, setContagemFiltro] = useState<number>(0);
 
   const [titulo, setTitulo] = useState("");
 
   const retornaVagas = useCallback(async () => {
     try {      
-      const retorno = await api.get(`/lista?page=${paginaAtual}`);
+      const retorno = await api.get(`/lista?page=${paginaAtualFiltro}`);
       setDados(retorno.data.item);   
-      setTotalPaginas(retorno.data.totalPaginas);    
+      // setTotalPaginas(retorno.data.totalPaginas);    
       setContagem(retorno.data.contagem);
-      console.log(totalPaginas) ;
     } catch (error) {
       console.log("Ocorreu algum erro.", error);
     }
   }, [paginaAtual]);
 
   const buscaVaga = useCallback( async (titulo: string) => {   
-    const retorno = await api.get(`/lista/busca?page=${paginaFiltro}&titulo=${titulo}`); 
+    const retorno = await api.get(`/lista/busca?page=${paginaAtualFiltro}&titulo=${titulo}`); 
     setDados(retorno.data.resultado);
     // console.log(retorno.data);
-    setPaginaFiltro(retorno.data.contagem)
+    setContagemFiltro(retorno.data.contagem)
+    setPaginaAtualFiltro(retorno.data.page);
     setTitulo(titulo);
   },[titulo]);
 
@@ -39,8 +41,9 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   }, [retornaVagas]);
 
   return (
-    <infoVagasContext.Provider value={{vagas: dados, totalPaginas, paginaAtual, setPaginaAtual,
-                                       contagem,  buscaVaga, paginaFiltro, setPaginaFiltro }}>
+    <infoVagasContext.Provider value={{vagas: dados, paginaAtual, setPaginaAtual,
+                                       contagem,  buscaVaga, setPaginaAtualFiltro, 
+                                       contagemFiltro, paginaAtualFiltro}}>
       {children}
     </infoVagasContext.Provider>
   );

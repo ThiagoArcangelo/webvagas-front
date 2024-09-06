@@ -26,18 +26,18 @@ import {
 import { Button } from "./ui/button";
 import { Item } from "@/context/Interfaces/interfaces";
 
-export function Filtro() {
-  const {vagas: dados, setPaginaAtual, paginaAtual, contagem} = useContext(infoVagasContext);
-  const total = Math.ceil(contagem / 10);
+export function TabelaFiltro() {
+  const {vagas: dados, setPaginaAtualFiltro, paginaAtualFiltro, contagemFiltro} = useContext(infoVagasContext);
+  const total = Math.ceil(contagemFiltro / 10);
 
   // const paginaSeguinte = paginaAtual + 1;
 
   const proximaPagina = () => {
-    setPaginaAtual((proxPagina) => proxPagina + 1);
+    setPaginaAtualFiltro((proxPagina) => proxPagina + 1);
   };
 
   const paginaAnterior = () => {
-    setPaginaAtual((pagAnterior) => pagAnterior - 1);
+    setPaginaAtualFiltro((pagAnterior) => pagAnterior - 1);
   };
 
   if (!dados || dados.length === 0) return null;
@@ -82,15 +82,15 @@ export function Filtro() {
       <Pagination className="flex justify-end">
           <PaginationContent>
             <PaginationItem>
-              <Button onClick={paginaAnterior} disabled={paginaAtual <= 1}  className="hover:bg-gray-200 px-2 py-2 hover:rounded w-24
+              <Button onClick={paginaAnterior} disabled={paginaAtualFiltro <= 1}  className="hover:bg-gray-200 px-2 py-2 hover:rounded w-24
                cursor-pointer text-[12px]" 
              >
               Anterior
             </Button> 
             </PaginationItem>      
-            <div className="px-4 py-2 text-[12px]">{`Página ${paginaAtual} de ${total}`}</div>   
+            <div className="px-4 py-2 text-[12px]">{`Página ${paginaAtualFiltro} de ${total}`}</div>   
             <PaginationItem>
-              <Button  onClick={proximaPagina} disabled={paginaAtual === total}  className="hover:bg-gray-200 px-4 py-2
+              <Button  onClick={proximaPagina} disabled={paginaAtualFiltro === total}  className="hover:bg-gray-200 px-4 py-2
                hover:rounded w-24 cursor-pointer text-[12px]" 
               >
                 Próxima
