@@ -1,8 +1,7 @@
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { Header } from './components/header';
 import { Tabela } from "./components/tabela";
 import { Footer } from "./components/footer";
-import { TabelaFiltro } from "./components/tabelaFiltro";
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { Sobre } from './pages/Sobre';
 
 function App() {
@@ -17,7 +16,6 @@ function App() {
           <Routes>
             <Route path="/"  element={<Tabela />}/>
             <Route path="/Sobre" element={<Sobre />} />
-            <Route path="/Pesquisa" element={<TabelaFiltro />} />d
           </Routes>
         </div>
         <div className=" min-h-12 w-[100%] mt-auto">

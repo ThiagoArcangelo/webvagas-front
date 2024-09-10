@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import logo from "../../public/assets/logo.png"
 
 export function Header(){
-  const { buscaVaga, setPaginaAtual} = useContext(infoVagasContext);
+  const { setTitulo, retornaVagas } = useContext(infoVagasContext);
   const [titulo, setValorTitulo] = useState("");
 
   const valorTitulo = (e: React.ChangeEvent<HTMLInputElement>) => {    
@@ -14,17 +14,27 @@ export function Header(){
 
   const buscarComEnter = (event: { key: string; }) => {
     if(event.key == 'Enter'){
-      {buscaVaga(titulo);} 
-      <Link to="/Pesquisa"></Link>     
+      if(setTitulo)
+        {setTitulo(titulo);} 
+      retornaVagas(titulo);
     }
   }
 
   /*const buscaTitulo = () => {
-    buscaVaga(titulo);
+    retornaVagas(titulo);
   }*/
 
+    const retornaPesquisa = () => {
+      if(setTitulo){
+        setTitulo(titulo);
+        retornaVagas(titulo);
+      }
+      
+    }
+
     const LimpaPesquisa = () => {
-      setValorTitulo("");
+      setValorTitulo("");      
+      retornaVagas("");
     }
 
   return (
@@ -51,7 +61,7 @@ export function Header(){
           onChange={valorTitulo}
           onKeyDown={buscarComEnter}
         />  
-        <Link to="/Pesquisa" onClick={() => buscaVaga(titulo)} className="bg-slate-300 w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
+        <Link to="/" onClick={() => retornaPesquisa} className="bg-slate-300 w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
          rounded-r-[8px]   hover:bg-slate-200 px-2 opacity-60  ml-0 cursor-pointer ">
           <Search /*color="#14192f"*/ color="black" size={17} />
         </Link>  

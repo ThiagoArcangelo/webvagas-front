@@ -8,12 +8,10 @@ export interface Item {
 export interface InfoContextProps {
   vagas: Item[];
   paginaAtual: number;
-  // totalPaginas: number;
   contagem: number;
-  paginaAtualFiltro: number;
-  // totalPaginasFiltro: number;
-  contagemFiltro: number;
-  setPaginaAtual: React.Dispatch<React.SetStateAction<number>>; //(pagina: number) => void;
-  setPaginaAtualFiltro: React.Dispatch<React.SetStateAction<number>>; //(paginaFiltro: number) =>  void;
-  buscaVaga: (valor: string) => Promise<void>;
+  titulo?: string;
+  // setTitulo: React.Dispatch<React.SetStateAction<string>>;
+  setTitulo?: (titulo: string) => void;
+   setPaginaAtual: React.Dispatch<React.SetStateAction<number>>; //(pagina: number) => void;
+   retornaVagas: (titulo: string) => void;
 }

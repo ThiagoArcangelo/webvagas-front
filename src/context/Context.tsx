@@ -4,6 +4,70 @@ import { InfoContextProps, Item } from './Interfaces/interfaces';
 
 export const infoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
 
+
+export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) => {
+
+  const [dados, setDados] = useState<Item[]>([]);
+  const [paginaAtual, setPaginaAtual] = useState<number>(1);
+  const [contagem, setContagem] = useState<number>(0);
+  const [titulo, setTitulo] = useState("");
+
+  const retornaVagas = useCallback(async (titulo: string) => {
+    try {
+      let retorno;
+
+      if(titulo === ""){
+        retorno = await api.get(`/lista?page=${paginaAtual}`);
+        setDados(retorno.data.item);
+        setContagem(retorno.data.contagem);
+      }
+      else {   
+        retorno = await api.get(`/lista/busca?page=${paginaAtual}&titulo=${titulo}`);
+        setDados(retorno.data.resultado);
+        setContagem(retorno.data.contagemPesquisa);
+        setPaginaAtual(retorno.data.page);
+        if(setTitulo)
+          setTitulo(titulo);
+      }
+    } catch (error) {
+      console.log("Ocorreu algum erro.", error);
+    }
+  }, [paginaAtual]);
+
+  // const buscaVaga = useCallback(async (titulo: string) => {
+  //   try {
+  //     const retorno = await api.get(`/lista/busca?page=${paginaAtualFiltro}&titulo=${titulo}`);
+  //     setDadosFiltro(retorno.data.resultado);
+  //     setContagemFiltro(retorno.data.contagemPesquisa);
+  //     setPaginaAtualFiltro(retorno.data.page);
+  //     setTitulo(titulo);
+  //   } catch (error) {
+  //     console.log("Ocorreu algum erro na busca.", error);
+  //   }
+  // }, [paginaAtualFiltro]);
+
+  useEffect(() => {
+      retornaVagas(titulo);
+  }, [retornaVagas, titulo]);
+  // }, [retornaVagas, buscaVaga, titulo]);
+
+  return (
+    <infoVagasContext.Provider value={{
+      vagas: dados,
+      paginaAtual,
+      setPaginaAtual,
+      contagem,
+      titulo,
+      setTitulo,
+      retornaVagas
+    }}>
+      {children}
+    </infoVagasContext.Provider>
+  );
+};
+
+
+/*
 export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [dados, setDados] = useState<Item[]>([]);
@@ -37,16 +101,24 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   },[paginaAtualFiltro, titulo]);
 
   useEffect(() => {
+    if(titulo != "")
+      buscaVaga(titulo);
+    else
     retornaVagas();
-    buscaVaga(titulo);
   }, [retornaVagas, buscaVaga]);
 
 
   return (
-    <infoVagasContext.Provider value={{vagas: dados, paginaAtual, setPaginaAtual,
-                                       contagem,  buscaVaga, setPaginaAtualFiltro, 
-                                       contagemFiltro, paginaAtualFiltro}}>
+    <infoVagasContext.Provider value={{
+      vagas: dados, 
+      paginaAtual, 
+      setPaginaAtual,
+      contagem,  
+      buscaVaga, 
+      setPaginaAtualFiltro, 
+      contagemFiltro, 
+      paginaAtualFiltro}}>
       {children}
     </infoVagasContext.Provider>
   );
-};
+};*/
