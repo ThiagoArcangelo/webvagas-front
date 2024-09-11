@@ -19,12 +19,12 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
       if(titulo === ""){
         retorno = await api.get(`/lista?page=${paginaAtual}`);
         setDados(retorno.data.item);
-        setContagem(retorno.data.contagem);
+        setContagem(retorno.data.contagemFiltro);
       }
       else {   
         retorno = await api.get(`/lista/busca?page=${paginaAtual}&titulo=${titulo}`);
         setDados(retorno.data.resultado);
-        setContagem(retorno.data.contagemPesquisa);
+        setContagem(retorno.data.contagem);
         setPaginaAtual(retorno.data.page);
         if(setTitulo)
           setTitulo(titulo);

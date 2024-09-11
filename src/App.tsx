@@ -3,6 +3,7 @@ import { Header } from './components/header';
 import { Tabela } from "./components/tabela";
 import { Footer } from "./components/footer";
 import { Sobre } from './pages/Sobre';
+import { InfoVagasContext } from './context/Context';
 
 function App() {
 
