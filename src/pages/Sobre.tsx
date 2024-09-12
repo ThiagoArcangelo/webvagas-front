@@ -6,7 +6,7 @@ export function Sobre() {
             <h2 className=" text=[#dadada] font-semibold py-2">Sobre Nós</h2>
             <h3 className="text=[#dadada] font-semibold py-4">Nossa missão</h3>
             <p className="text=[#dadada] text-justify">
-                No BuscaEmpregos-Bauru, nossa missão é tornar a busca por oportunidades de emprego 
+                No ListaEmpregos-Bauru, nossa missão é tornar a busca por oportunidades de emprego 
                 mais simples e eficiente. Estamos comprometidos em reunir todas as vagas disponíveis 
                 na nossa região em um único lugar, facilitando a vida daqueles que estão em busca de 
                 recolocação profissional. Acreditamos que a centralização das informações não apenas economiza tempo, 
@@ -22,7 +22,7 @@ export function Sobre() {
             </p>
             <h3 className=" text=[#dadada] font-semibold py-4">Nossa História</h3>
             <p className="text=[#dadada] text-justify">
-                O BuscaEmpregos-Bauru nasceu do desejo de resolver um problema comum: a dificuldade de 
+                O ListaEmpregos-Bauru nasceu do desejo de resolver um problema comum: a dificuldade de 
                 encontrar todas as oportunidades de emprego disponíveis em um só lugar. 
                 Nossa equipe é apaixonada por conectar talentos locais com as melhores ofertas de 
                 trabalho e acredita que a centralização das informações é a chave para facilitar o 

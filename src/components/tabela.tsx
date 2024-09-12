@@ -1,5 +1,3 @@
-// import { useEffect, useState } from "react";
-
 import { useContext} from "react";
 import { infoVagasContext } from "@/context/Context";
 import {
@@ -28,9 +26,8 @@ import { Item } from "@/context/Interfaces/interfaces";
 
 export function Tabela() {
   const {vagas: dados, setPaginaAtual, paginaAtual, contagem} = useContext(infoVagasContext);
-  const total = Math.ceil(contagem / 10);
-
-  // const paginaSeguinte = paginaAtual + 1;
+  const limite = 25;
+  const total = Math.ceil(contagem / limite);
 
   const proximaPagina = () => {
     setPaginaAtual((proxPagina) => proxPagina + 1);
@@ -40,7 +37,7 @@ export function Tabela() {
     setPaginaAtual((pagAnterior) => pagAnterior - 1);
   };
 
-  if (!dados || dados.length === 0) return null;
+  if (!dados || dados.length === 0) return <div className="mt-5 text-[12px]">Nenhum dado Encontrado</div>;
 
   return (
     <div className="w-[80%] " >

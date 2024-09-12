@@ -4,35 +4,39 @@ import { InfoContextProps, Item } from './Interfaces/interfaces';
 
 export const infoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
 
-
 export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) => {
+
+  const Empty = "";
 
   const [dados, setDados] = useState<Item[]>([]);
   const [paginaAtual, setPaginaAtual] = useState<number>(1);
   const [contagem, setContagem] = useState<number>(0);
-  const [titulo, setTitulo] = useState("");
+  const [titulo, setTitulo] = useState(Empty);
 
   const retornaVagas = useCallback(async (titulo: string) => {
     try {
       let retorno;
 
-      if(titulo === ""){
-        retorno = await api.get(`/lista?page=${paginaAtual}`);
-        setDados(retorno.data.item);
-        setContagem(retorno.data.contagemFiltro);
-      }
-      else {   
-        retorno = await api.get(`/lista/busca?page=${paginaAtual}&titulo=${titulo}`);
-        setDados(retorno.data.resultado);
-        setContagem(retorno.data.contagem);
+      if(titulo === Empty){
+        retorno = await api.get(`/lista?page=${paginaAtual}`);    
         setPaginaAtual(retorno.data.page);
-        if(setTitulo)
-          setTitulo(titulo);
       }
+      else {
+        retorno = await api.get(`/lista/busca?page=${paginaAtual}&titulo=${titulo}`);
+        setPaginaAtual(retorno.data.page);
+      }
+
+      setDados(retorno.data.item);
+      setContagem(retorno.data.contagem);
+      // setPaginaAtual(retorno.data.page);
+
+      if(setTitulo)
+        setTitulo(titulo);
+      
     } catch (error) {
       console.log("Ocorreu algum erro.", error);
     }
-  }, [paginaAtual]);
+  }, [paginaAtual, titulo]);
 
   // const buscaVaga = useCallback(async (titulo: string) => {
   //   try {
