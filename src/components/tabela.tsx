@@ -1,4 +1,4 @@
-import { useContext} from "react";
+import { useContext, useState} from "react";
 import { infoVagasContext } from "@/context/Context";
 import {
   Table,
@@ -25,15 +25,21 @@ import { Button } from "./ui/button";
 import { Item } from "@/context/Interfaces/interfaces";
 
 export function Tabela() {
-  const {vagas: dados, setPaginaAtual, paginaAtual, contagem} = useContext(infoVagasContext);
-  const limite = 25;
-  const total = Math.ceil(contagem / limite);
+  const {vagas: dados, setPaginaAtual, paginaAtual, contagem, setLimite} = useContext(infoVagasContext);
+  const [controlePag, setControlePag] = useState<number>(0);
+  const valorLimite = 25;
+  setLimite(valorLimite);
+  const total = Math.ceil(contagem / valorLimite);
 
   const proximaPagina = () => {
-    setPaginaAtual((proxPagina) => proxPagina + 1);
+    setControlePag(paginaAtual);
+
+    if(controlePag <= 1)
+      setPaginaAtual((proxPagina) => proxPagina + 1);
   };
 
   const paginaAnterior = () => {
+    
     setPaginaAtual((pagAnterior) => pagAnterior - 1);
   };
 
