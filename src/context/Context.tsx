@@ -149,8 +149,8 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
     try {
       let retorno: VagasResponse;
       const url = valor === Empty 
-        ? `/lista?page=${pagina}` 
-        : `/lista/busca?page=${pagina}&titulo=${valor}`;
+        ? `/lista?page=${pagina}&${limite}` 
+        : `/lista/busca?page=${pagina}&titulo=${valor}${limite}`;
 
       const response = await api.get(url);
       retorno = response.data; 
