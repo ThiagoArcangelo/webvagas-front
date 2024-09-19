@@ -32,17 +32,18 @@ export interface VagasResponse {
   item: Item[];
   page: number; 
   contagem: number;
+  limit: number;
 }
 
 export interface InfoContextProps {
   vagas: Item[];
-  paginaAtual: number; // Página atual para listagem completa
-  setPaginaAtual: Dispatch<SetStateAction<number>>;
-  paginaAtualPesquisa: number; // Página atual para pesquisa
-  setPaginaAtualPesquisa: Dispatch<SetStateAction<number>>;
-  contagem: number; // Total de itens ou vagas (dependendo da implementação)
+  paginaAtual: number; // Número atual da página em uso
+  setPaginaAtual: Dispatch<SetStateAction<number>>; // Função Setter para paginação do conteúdo completo
+  paginaAtualPesquisa: number; // Pagina atual da pesquisa
+  setPaginaAtualPesquisa: Dispatch<SetStateAction<number>>; // Função Setter para paginação do conteúdo pesquisado
+  contagem: number; // Total de vagas
   titulo: string; // Título da pesquisa
   setTitulo: Dispatch<SetStateAction<string>>;
   retornaVagas: (valor: string, pagina: number) => void; // Função para buscar vagas
-  setLimite: (valor: number) => void;
+  setLimite: (valor: number) => void; // Define o valor de limit no skip da url
 }

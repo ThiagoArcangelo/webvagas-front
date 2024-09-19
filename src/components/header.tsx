@@ -73,8 +73,7 @@ import logo from "../../public/assets/logo.png"
 export function Header() {
   const { setTitulo, retornaVagas, setPaginaAtual, setPaginaAtualPesquisa, paginaAtual } = useContext(infoVagasContext);
   const [titulo, setValorTitulo] = useState("");
-  const [paginaPesquisa, setPaginaPesquisa] = useState<number>(1);
-  const Empty = "";
+  const paginaPesquisa = 1;
 
   const valorTitulo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValorTitulo(e.target.value);
@@ -87,18 +86,16 @@ export function Header() {
   }
 
   const retornaPesquisa = () => {
-    setPaginaPesquisa(paginaAtual);
-    setPaginaAtualPesquisa(paginaPesquisa);  // Resetar página de pesquisa para 1
+    setPaginaAtualPesquisa(paginaPesquisa);  
     setTitulo(titulo);
-    retornaVagas(titulo, paginaPesquisa);  // Passar a página 1 para pesquisa
+    retornaVagas(titulo, paginaPesquisa);
   }
 
   const LimpaPesquisa = () => {
-    setValorTitulo(Empty);
-    setTitulo(Empty);
-    setPaginaAtual(1);  // Resetar página da lista completa para 1
-    setPaginaAtualPesquisa(1); // Resetar página da pesquisa para 1
-    retornaVagas(Empty, 1);  // Passar a página 1 para lista completa
+    setValorTitulo("");
+    setTitulo("");
+    setPaginaAtual(paginaAtual);  // Resetar página da lista completa para 1
+    setPaginaAtualPesquisa(paginaAtual); // Resetar página da pesquisa para 1
   }
 
   return (

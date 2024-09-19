@@ -1,3 +1,4 @@
+//#region Comentado
 // import React, { createContext, useCallback, useEffect, useState } from 'react';
 // import api from '@/services/api';
 // import { InfoContextProps, Item } from './Interfaces/interfaces';
@@ -126,7 +127,7 @@
 //     </infoVagasContext.Provider>
 //   );
 // };*/
-
+//#endregion
 
 
 import React, { createContext, useCallback, useEffect, useState } from 'react';
@@ -148,9 +149,10 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   const retornaVagas = useCallback(async (valor: string, pagina: number) => {
     try {
       let retorno: VagasResponse;
+
       const url = valor === Empty 
         ? `/lista?page=${pagina}&${limite}` 
-        : `/lista/busca?page=${pagina}&titulo=${valor}${limite}`;
+        : `/lista/busca?page=${pagina}&titulo=${valor}`;
 
       const response = await api.get(url);
       retorno = response.data; 
@@ -158,6 +160,7 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
       setDados(retorno.item);
       setContagem(retorno.contagem); 
       setPaginaAtual(retorno.page);
+      setContagem(retorno.limit);
 
       if (valor === Empty) {
         setPaginaAtual(pagina);

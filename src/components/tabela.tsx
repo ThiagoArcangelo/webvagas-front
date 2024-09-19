@@ -28,7 +28,6 @@ export function Tabela() {
   const {vagas: dados, setPaginaAtual, paginaAtual, contagem, setLimite} = useContext(infoVagasContext);
   const [controlePag, setControlePag] = useState<number>(0);
   const valorLimite = 25;
-  setLimite(valorLimite);
   const total = Math.ceil(contagem / valorLimite);
 
   const proximaPagina = () => {
