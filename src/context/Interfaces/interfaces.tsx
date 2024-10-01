@@ -1,3 +1,5 @@
+//#region Interface Comentada
+
 // export interface Item {
 //   _id: number;
 //   Vaga?: string;
@@ -16,7 +18,7 @@
 //    retornaVagas: (titulo: string) => void;
 // }
 
-/////////////////////////////////////////////
+//#endregion
 
 import { Dispatch, SetStateAction } from 'react';
 
@@ -32,7 +34,6 @@ export interface VagasResponse {
   item: Item[];
   page: number; 
   contagem: number;
-  limit: number;
 }
 
 export interface InfoContextProps {
@@ -44,6 +45,6 @@ export interface InfoContextProps {
   contagem: number; // Total de vagas
   titulo: string; // Título da pesquisa
   setTitulo: Dispatch<SetStateAction<string>>;
-  retornaVagas: (valor: string, pagina: number) => void; // Função para buscar vagas
+  // retornaVagas: (valor: string, pagina: number) => void; // Função para buscar vagas
   setLimite: (valor: number) => void; // Define o valor de limit no skip da url
 }

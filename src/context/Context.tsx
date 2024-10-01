@@ -133,6 +133,7 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import api from '@/services/api';
 import { InfoContextProps, Item, VagasResponse } from './Interfaces/interfaces';
+// import { Header } from '@/components/header';
 
 export const infoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
 
@@ -158,10 +159,9 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
       retorno = response.data; 
 
       setDados(retorno.item);
-      setContagem(retorno.contagem); 
       setPaginaAtual(retorno.page);
-      setContagem(retorno.limit);
-
+      setContagem(retorno.contagem); 
+      
       if (valor === Empty) {
         setPaginaAtual(pagina);
       } else {
@@ -171,7 +171,7 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
     } catch (error) {
       console.log("Ocorreu algum erro.", error);
     }
-  }, []);
+  }, []); 
 
   useEffect(() => {
     retornaVagas(titulo, titulo === Empty ? paginaAtual : paginaAtualPesquisa);
@@ -187,10 +187,14 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
       contagem,
       titulo,
       setTitulo,
-      retornaVagas,
+      // retornaVagas,
       setLimite
     }}>
       {children}
     </infoVagasContext.Provider>
   );
 };
+
+export const ContextoPesquisa = ()  => {
+  return React.useContext(infoVagasContext)
+}
