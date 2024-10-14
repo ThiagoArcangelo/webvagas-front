@@ -3,7 +3,7 @@
 // import api from '@/services/api';
 // import { InfoContextProps, Item } from './Interfaces/interfaces';
 
-// export const infoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
+// export const InfoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
 
 // export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) => {
 
@@ -57,7 +57,7 @@
 //   // }, [retornaVagas, buscaVaga, titulo]);
 
 //   return (
-//     <infoVagasContext.Provider value={{
+//     <InfoVagasContext.Provider value={{
 //       vagas: dados,
 //       paginaAtual,
 //       setPaginaAtual,
@@ -67,7 +67,7 @@
 //       retornaVagas
 //     }}>
 //       {children}
-//     </infoVagasContext.Provider>
+//     </InfoVagasContext.Provider>
 //   );
 // };
 
@@ -114,7 +114,7 @@
 
 
 //   return (
-//     <infoVagasContext.Provider value={{
+//     <InfoVagasContext.Provider value={{
 //       vagas: dados, 
 //       paginaAtual, 
 //       setPaginaAtual,
@@ -124,7 +124,7 @@
 //       contagemFiltro, 
 //       paginaAtualFiltro}}>
 //       {children}
-//     </infoVagasContext.Provider>
+//     </InfoVagasContext.Provider>
 //   );
 // };*/
 //#endregion
@@ -133,9 +133,8 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import api from '@/services/api';
 import { InfoContextProps, Item, VagasResponse } from './Interfaces/interfaces';
-// import { Header } from '@/components/header';
 
-export const infoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
+export const InfoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
 
 export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) => {
   const Empty = "";
@@ -147,38 +146,43 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   const [titulo, setTitulo] = useState(Empty);
   const [limite, setLimite] = useState<number>(0);
 
-  const retornaVagas = useCallback(async (valor: string, pagina: number) => {
+  const retornaVagas = useCallback(async (titulo: string, pagina: number) => {
     try {
       let retorno: VagasResponse;
 
-      const url = valor === Empty 
-        ? `/lista?page=${pagina}&${limite}` 
-        : `/lista/busca?page=${pagina}&titulo=${valor}`;
+      const url = titulo === Empty 
+        ? `/lista?page=${paginaAtual}&${limite}` 
+        : `/lista/busca?page=${paginaAtualPesquisa}&titulo=${titulo}&${limite}`;
 
       const response = await api.get(url);
       retorno = response.data; 
 
       setDados(retorno.item);
-      setPaginaAtual(retorno.page);
+      
+      if(titulo !== Empty)
+        setPaginaAtualPesquisa(retorno.page)
+      else
+        setPaginaAtual(retorno.page);
+      
       setContagem(retorno.contagem); 
       
-      if (valor === Empty) {
+      if (titulo === Empty) {
         setPaginaAtual(pagina);
       } else {
         setPaginaAtualPesquisa(pagina);
-        setTitulo(valor);
+        // setTitulo(valor);
       }
     } catch (error) {
       console.log("Ocorreu algum erro.", error);
     }
-  }, []); 
+  }, [paginaAtual, titulo]); 
 
   useEffect(() => {
     retornaVagas(titulo, titulo === Empty ? paginaAtual : paginaAtualPesquisa);
   }, [retornaVagas, titulo, paginaAtual, paginaAtualPesquisa]);
 
   return (
-    <infoVagasContext.Provider value={{
+    <InfoVagasContext.Provider value={{
       vagas: dados,
       paginaAtual,
       setPaginaAtual,
@@ -191,10 +195,10 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
       setLimite
     }}>
       {children}
-    </infoVagasContext.Provider>
+    </InfoVagasContext.Provider>
   );
 };
 
-export const ContextoPesquisa = ()  => {
-  return React.useContext(infoVagasContext)
-}
+// export const ContextoPesquisa = ()  => {
+//   return React.useContext(InfoVagasContext)
+// }

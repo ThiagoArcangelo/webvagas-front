@@ -4,6 +4,7 @@ import { Tabela } from "./components/tabela";
 import { Footer } from "./components/footer";
 import { Sobre } from './pages/Sobre';
 import { InfoVagasProvider } from './context/Context';
+import { Excecao } from './components/excecao';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/"  element={<Tabela />}/>
               <Route path="/Sobre" element={<Sobre />} />
+              <Route path="/Excecao" element={<Excecao />} />
             </Routes>
           </div>
         </InfoVagasProvider>

@@ -1,5 +1,7 @@
 import { useContext, useState} from "react";
-import { infoVagasContext } from "@/context/Context";
+import { InfoVagasContext } from "@/context/Context";
+import { useNavigate } from "react-router-dom";
+
 import {
   Table,
   TableBody,
@@ -25,24 +27,25 @@ import { Button } from "./ui/button";
 import { Item } from "@/context/Interfaces/interfaces";
 
 export function Tabela() {
-  const {vagas: dados, setPaginaAtual, paginaAtual, contagem, setLimite} = useContext(infoVagasContext);
+  const {vagas: dados, setPaginaAtual, paginaAtual, contagem} = useContext(InfoVagasContext);
   const [controlePag, setControlePag] = useState<number>(0);
   const valorLimite = 25;
   const total = Math.ceil(contagem / valorLimite);
+  const navigate = useNavigate();
 
   const proximaPagina = () => {
     setControlePag(paginaAtual);
 
     if(controlePag <= 1)
-      setPaginaAtual((proxPagina) => proxPagina + 1);
+      setPaginaAtual(proxPagina => proxPagina + 1);
   };
 
   const paginaAnterior = () => {
     
-    setPaginaAtual((pagAnterior) => pagAnterior - 1);
+    setPaginaAtual(pagAnterior => pagAnterior - 1);
   };
 
-  if (!dados || dados.length === 0) return <div className="mt-5 text-[12px]">Nenhum dado Encontrado</div>;
+  if (!dados || dados.length === 0) { navigate("/Excecao"); }
 
   return (
     <div className="w-[80%] " >

@@ -136,15 +136,14 @@
 //#endregion
 
 import { Search } from "lucide-react";
-import { useState } from "react";
-import { ContextoPesquisa } from "@/context/Context";
+import { useContext, useState } from "react";
+import { InfoVagasContext } from "@/context/Context";
 import { Link } from "react-router-dom";
 import logo from "../../public/assets/logo.png"
 
 export function Header() {
-  const {setTitulo} = ContextoPesquisa();
-  const [vPesquisa, setPesquisa] = useState("");
-  // const paginaPesquisa = 1;
+  const {setTitulo, setPaginaAtualPesquisa, setPaginaAtual} = useContext(InfoVagasContext);
+  const [pesquisa, setPesquisa] = useState("");
 
   const valorTitulo = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPesquisa(e.target.value);
@@ -157,12 +156,14 @@ export function Header() {
   }
 
   const retornaPesquisa = () => {
-      setTitulo(vPesquisa)
+      setTitulo(pesquisa)
+      setPaginaAtualPesquisa(1);
   }
 
   const LimpaPesquisa = () => {
     setPesquisa("");
-    setTitulo(vPesquisa);
+    setTitulo(pesquisa);
+    setPaginaAtual(1);
   }
 
   return (
@@ -178,16 +179,16 @@ export function Header() {
       <div className="w-52 h-10 flex justify-center items-center">
         <Link to="/" onClick={LimpaPesquisa} ><img src={logo} alt="BuscaEmpregos-Bauru" /></Link>
       </div>
-      <div className="w-[30%] flex mr-14">
+      <div className="w-[30%] flex mr-14 bg-white rounded-r-[8px] rounded-l-[8px]">
         <input           
           className="w-[87%] text-gray-950  bg-[#FFF] border-solid border-2 border-white  border-r-0 rounded-l-[8px] px-2 outline-none" 
           type="text"
-          value={vPesquisa}
+          value={pesquisa}
           onChange={valorTitulo}
           onKeyDown={buscarComEnter}
         />  
-        <Link to="/" onClick={retornaPesquisa} className="bg-slate-300 w-[13%] flex justify-center items-center border-solid border-2 border-white outline-none border-l-0
-                                                         rounded-r-[8px]   hover:bg-slate-200 px-2 opacity-60  ml-0 cursor-pointer ">
+        <Link to="/" onClick={retornaPesquisa} className="bg-white w-[13%] flex justify-center items-center border-solid  border-white outline-none border-l-0
+                                                         rounded-r-[8px]   hover:bg-slate-300 px-2 opacity-60  ml-0 cursor-pointer ">
           <Search color="black" size={17} />
         </Link>  
       </div>  
