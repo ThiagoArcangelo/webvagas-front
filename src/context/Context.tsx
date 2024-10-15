@@ -24,22 +24,24 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
 
       const response = await api.get(url);
       retorno = response.data; 
-
+            
       setDados(retorno.item);
-      setLimite(retorno.limite);
       setContagem(retorno.contagem); 
-
+      
+      // console.log(retorno.Limit);
+      console.log(retorno.contagem);
+      
       setTitulo(valor);
       
       if(valor !== Empty)
         setPaginaAtualPesquisa(retorno.page)
       else
-        setPaginaAtual(retorno.page);      
-      
-      if (valor === Empty) 
-        setPaginaAtual(pagina);
-      else 
-        setPaginaAtualPesquisa(pagina);
+      setPaginaAtual(retorno.page);      
+    
+    if (valor === Empty) 
+      setPaginaAtual(pagina);
+    else 
+    setPaginaAtualPesquisa(pagina);
       
     } catch (error) {
       console.log("Ocorreu algum erro.", error);
@@ -61,7 +63,8 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
       titulo,
       setTitulo,
       // retornaVagas,
-      setLimite
+      setLimite,
+      limite
     }}>
       {children}
     </InfoVagasContext.Provider>

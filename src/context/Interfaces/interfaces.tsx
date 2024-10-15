@@ -48,4 +48,5 @@ export interface InfoContextProps {
   setTitulo: Dispatch<SetStateAction<string>>;
   // retornaVagas: (valor: string, pagina: number) => void; // Função para buscar vagas
   setLimite: Dispatch<SetStateAction<number>>; // Define o valor de limit no skip da url
+  limite: number;
 }

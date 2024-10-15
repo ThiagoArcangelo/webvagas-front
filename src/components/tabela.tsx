@@ -1,4 +1,4 @@
-import { useContext, useState} from "react";
+import { useContext} from "react";
 import { InfoVagasContext } from "@/context/Context";
 import { useNavigate } from "react-router-dom";
 
@@ -27,32 +27,30 @@ import { Button } from "./ui/button";
 import { Item } from "@/context/Interfaces/interfaces";
 
 export function Tabela() {
-  const {vagas: dados, setPaginaAtual, paginaAtual, contagem, setLimite, titulo, setPaginaAtualPesquisa, paginaAtualPesquisa} = useContext(InfoVagasContext);
-  const [controlePag, setControlePag] = useState<number>(0);
-  const valorLimite = 25;
-  setLimite(valorLimite);
+  const {vagas: dados, setPaginaAtual, paginaAtual, contagem, titulo, setPaginaAtualPesquisa, paginaAtualPesquisa} = useContext(InfoVagasContext);
+ const valorLimite = 25;
   const total = Math.ceil(contagem / valorLimite);
   const navigate = useNavigate();
 
-  const proximaPagina = () => {    
-    if(titulo == ""){
-      
-      setControlePag(paginaAtual);
-      if(controlePag <= 1)
-        setPaginaAtual(proxPagina => proxPagina + 1);
+  const proximaPagina = () => {
+    if (titulo === "") {
+      if (paginaAtual <= total) {
+        setPaginaAtual(paginaAtual => paginaAtual + 1);
+      }
+    } else {
+      if (paginaAtualPesquisa < total) {
+        setPaginaAtualPesquisa(paginaAtualPesquisa => paginaAtualPesquisa + 1);
+      }
     }
-    else {
-      setControlePag(paginaAtualPesquisa);
-      if(controlePag <= 1)
-        setPaginaAtualPesquisa(proxPagina => proxPagina + 1)
-    }  
   };
 
   const paginaAnterior = () => {
-    if(titulo == "")
-      setPaginaAtual(pagAnterior => pagAnterior - 1);
-    else
-    setPaginaAtualPesquisa(pagAnterior => pagAnterior - 1);
+      if(titulo == ""){
+        setPaginaAtual(pagAnterior => pagAnterior - 1);
+      }
+      else{
+        setPaginaAtualPesquisa(pagAnterior => pagAnterior - 1);
+      }   
   };
 
   if (!dados || dados.length === 0) { navigate("/Excecao"); }
@@ -97,7 +95,7 @@ export function Tabela() {
       <Pagination className="flex justify-end">
           <PaginationContent>
             <PaginationItem>
-              <Button onClick={paginaAnterior} disabled={paginaAtual <= 1}  className="hover:bg-gray-200 px-2 py-2 hover:rounded w-24
+              <Button onClick={paginaAnterior} disabled={titulo == "" ? (paginaAtual <= 1) : (paginaAtualPesquisa <= 1)}  className="hover:bg-gray-200 px-2 py-2 hover:rounded w-24
                cursor-pointer text-[12px]" 
              >
               Anterior
@@ -105,7 +103,7 @@ export function Tabela() {
             </PaginationItem>      
             <div className="px-4 py-2 text-[12px]">{`Página ${titulo == "" ? paginaAtual : paginaAtualPesquisa} de ${total}`}</div>   
             <PaginationItem>
-              <Button  onClick={proximaPagina} disabled={paginaAtual === total || paginaAtualPesquisa === total}  className="hover:bg-gray-200 px-4 py-2
+              <Button  onClick={proximaPagina}  disabled={(paginaAtual === total) || (titulo !== "" && paginaAtualPesquisa === total)} className="hover:bg-gray-200 px-4 py-2
                hover:rounded w-24 cursor-pointer text-[12px]" 
               >
                 Próxima
