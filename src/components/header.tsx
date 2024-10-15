@@ -162,7 +162,8 @@ export function Header() {
 
   const LimpaPesquisa = () => {
     setPesquisa("");
-    setTitulo(pesquisa);
+    // setTitulo(pesquisa);
+    setTitulo("");
     setPaginaAtual(1);
   }
 
