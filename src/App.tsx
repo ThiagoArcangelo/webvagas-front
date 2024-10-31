@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { Analytics } from "@vercel/analytics/react";
 import { Header } from './components/header';
 import { Tabela } from "./components/tabela";
 import { Footer } from "./components/footer";
@@ -11,6 +12,7 @@ function App() {
   return (
     <Router>
       <div className=" flex w-[100%] flex-col h-screen min-h-[100%] justify-between">
+        <Analytics />
         <InfoVagasProvider> 
           <div className="h-20">
             <Header />
