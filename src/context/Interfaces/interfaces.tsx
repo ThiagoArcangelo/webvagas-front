@@ -1,26 +1,5 @@
-//#region Interface Comentada
 
-// export interface Item {
-//   _id: number;
-//   Vaga?: string;
-//   Local?: string;
-//   Url?: string;
-// }
-
-// export interface InfoContextProps {
-//   vagas: Item[];
-//   paginaAtual: number;
-//   contagem: number;
-//   titulo?: string;
-//   // setTitulo: React.Dispatch<React.SetStateAction<string>>;
-//   setTitulo?: (titulo: string) => void;
-//    setPaginaAtual: React.Dispatch<React.SetStateAction<number>>; //(pagina: number) => void;
-//    retornaVagas: (titulo: string) => void;
-// }
-
-//#endregion
-
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export interface Item {
   _id: string;
@@ -49,4 +28,10 @@ export interface InfoContextProps {
   // retornaVagas: (valor: string, pagina: number) => void; // Função para buscar vagas
   setLimite: Dispatch<SetStateAction<number>>; // Define o valor de limit no skip da url
   limite: number;
+  progresso: number;
+  // loading: boolean;
+}
+
+export interface LoaderContext {
+  children: ReactNode;
 }

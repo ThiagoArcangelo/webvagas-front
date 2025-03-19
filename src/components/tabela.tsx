@@ -36,10 +36,13 @@ export function Tabela() {
     if (titulo === "") {
       if (paginaAtual <= total) {
         setPaginaAtual(paginaAtual => paginaAtual + 1);
+        window.scrollTo(0,0);
       }
+      
     } else {
       if (paginaAtualPesquisa < total) {
         setPaginaAtualPesquisa(paginaAtualPesquisa => paginaAtualPesquisa + 1);
+        window.scrollTo(-5,0);
       }
     }
   };
@@ -56,8 +59,8 @@ export function Tabela() {
   if (!dados || dados.length === 0) { navigate("/Excecao"); }
 
   return (
-    <div className="w-[80%] " >
-      <div className="border-none flex flex-col min-h-[65vh]  justify-between "> 
+    <div >
+      <div className="border-none flex flex-col justify-between "> 
         <Table className="border-none flex-1">
           <TableHeader className="boder-none  ">
             <TableRow className=" border-none ">

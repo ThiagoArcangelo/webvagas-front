@@ -168,8 +168,8 @@ export function Header() {
   }
 
   return (
-    <div className="flex items-center justify-between min-h-1  h-20 gap-4 bg-[#14192f]">
-      <div className="flex gap-4 ml-10">
+    <div className="flex items-center justify-between h-20 gap-4 bg-[#14192f] px-6">
+      <div className="flex gap-4">
         <div className="px-2 py-2 rounded-sm text-[#fff] hover:bg-gray-700 hover:rounded cursor-pointer ">
           <Link to="/" onClick={LimpaPesquisa} className="font-semibold">Vagas</Link>
         </div>
@@ -180,7 +180,7 @@ export function Header() {
       <div className="w-52 h-10 flex justify-center items-center">
         <Link to="/" onClick={LimpaPesquisa} ><img src={logo} alt="BuscaEmpregos-Bauru" /></Link>
       </div>
-      <div className="w-[30%] flex mr-14 bg-white rounded-r-[8px] rounded-l-[8px]">
+      <div className="w-60 flex bg-white rounded-r-[8px] rounded-l-[8px]">
         <input           
           className="w-[87%] text-gray-950  bg-[#FFF] border-solid border-2 border-white  border-r-0 rounded-l-[8px] px-2 outline-none" 
           type="text"

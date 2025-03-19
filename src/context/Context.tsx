@@ -4,6 +4,7 @@ import { InfoContextProps, Item, VagasResponse } from './Interfaces/interfaces';
 
 export const InfoVagasContext = createContext<InfoContextProps>({} as InfoContextProps);
 
+
 export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) => {
   const Empty = "";
 
@@ -13,23 +14,38 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
   const [contagem, setContagem] = useState<number>(0);
   const [titulo, setTitulo] = useState(Empty);
   const [limite, setLimite] = useState<number>(25);
-
+  const [progresso , setProgresso] = useState<number>(0);
+  
   const retornaVagas = useCallback(async (valor: string = "", pagina: number) => {
     try {
       let retorno: VagasResponse;
+
+      setProgresso(0);
 
       const url = valor === Empty 
         ? `/lista?page=${pagina}&limite=${limite}` 
         : `/lista/busca?page=${pagina}&titulo=${valor}&limite=${limite}`;
 
-      const response = await api.get(url);
+      const response = await api.get(url, {
+        onDownloadProgress: (evento) => {
+          console.log(evento);
+          if(evento.bytes > 1)
+            setProgresso(Math.round(evento.event.timeStamp / 100 * 4));
+        }
+      });
+
       retorno = response.data; 
             
       setDados(retorno.item);
       setContagem(retorno.contagem); 
-      
-      // console.log(retorno.Limit);
-      console.log(retorno.contagem);
+
+      // #region PROGRESS BAR NO CARREGAMENTO DA PAGINAÇÃO
+    const aguarde: boolean = pagina != paginaAtual || paginaAtualPesquisa  ? true : false;
+
+    aguarde == true 
+    ? setProgresso(100)
+    : setProgresso(0);
+    // #endregion
       
       setTitulo(valor);
       
@@ -41,10 +57,13 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
     if (valor === Empty) 
       setPaginaAtual(pagina);
     else 
-    setPaginaAtualPesquisa(pagina);
+    setPaginaAtualPesquisa(pagina);  
+
+    setProgresso(0);
       
     } catch (error) {
       console.log("Ocorreu algum erro.", error);
+      setProgresso(0);
     }
   }, []); 
 
@@ -64,13 +83,10 @@ export const InfoVagasProvider = ({ children }: { children: React.ReactNode }) =
       setTitulo,
       // retornaVagas,
       setLimite,
-      limite
+      limite,
+      progresso
     }}>
       {children}
     </InfoVagasContext.Provider>
   );
 };
-
-// export const ContextoPesquisa = ()  => {
-//   return React.useContext(InfoVagasContext)
-// }
